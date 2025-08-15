@@ -26,7 +26,7 @@ Learn how to write and execute shell scripts to automate tasks, handle user inpu
 
 
 ## Files
-- `scripts/shell-scripting.sh`: Shell script automating all tasks above
+- `scripts/shell_scripting.sh`: Shell script automating all tasks above
 
 ## Author
 Sanjay Mehra – DevOps Intern at BKN301
