@@ -1,0 +1,21 @@
+===== System Report =====
+Hostname: LAPTOP-19OR3S9M
+User: mehra
+Date: Sat Aug 16 17:32:14 UTC 2025
+Uptime: up 1 day, 2 hours, 45 minutes
+Disk Usage:
+Filesystem      Size  Used Avail Use% Mounted on
+none            3.4G     0  3.4G   0% /usr/lib/modules/6.6.87.2-microsoft-standard-WSL2
+none            3.4G  4.0K  3.4G   1% /mnt/wsl
+drivers         476G  307G  170G  65% /usr/lib/wsl/drivers
+/dev/sdd       1007G  1.9G  954G   1% /
+none            3.4G  376K  3.4G   1% /mnt/wslg
+none            3.4G     0  3.4G   0% /usr/lib/wsl/lib
+rootfs          3.4G  2.7M  3.4G   1% /init
+none            3.4G  512K  3.4G   1% /run
+none            3.4G     0  3.4G   0% /run/lock
+none            3.4G     0  3.4G   0% /run/shm
+none            3.4G   96K  3.4G   1% /mnt/wslg/versions.txt
+none            3.4G   96K  3.4G   1% /mnt/wslg/doc
+C:\             476G  307G  170G  65% /mnt/c
+tmpfs           3.4G   16K  3.4G   1% /run/user/1000
