@@ -10,7 +10,7 @@ This module introduces foundational cloud concepts and service models. It’s de
 
 # Goal:Understand what cloud computing is and why it is used.
 
-### ✅ Tasks
+### Tasks
 
 - Define cloud computing in simple terms.
 - Explain why companies prefer cloud over traditional datacenters.
