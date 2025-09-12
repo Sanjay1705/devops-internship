@@ -36,7 +36,6 @@ This module introduces foundational cloud concepts and service models. It’s de
 
 By completing this module, you will be able to:
 - Articulate the core concept of cloud computing and its business advantages.
-- Compare cloud vs. traditional datacenter strategies.
 - Distinguish between IaaS, PaaS, and SaaS with practical examples.
 - Recognize how cloud services are embedded in your daily tech usage.
 
