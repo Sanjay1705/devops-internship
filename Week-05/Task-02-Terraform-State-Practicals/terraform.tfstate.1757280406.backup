@@ -1,0 +1,46 @@
+{
+  "version": 4,
+  "terraform_version": "1.13.1",
+  "serial": 1,
+  "lineage": "3c5808c4-ec2a-a736-402d-2e5d1aab0d28",
+  "outputs": {},
+  "resources": [
+    {
+      "mode": "managed",
+      "type": "local_file",
+      "name": "demo",
+      "provider": "provider[\"registry.terraform.io/hashicorp/local\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "content": "hello-state",
+            "content_base64": null,
+            "content_base64sha256": "9MnO9vDW18uhbxD8VWJ5N4z+Gc0Knqt8LrTObB7lUkk=",
+            "content_base64sha512": "l6/3ImDIQL/7Zz0ccKPYGzkC6TGThaHIk5rtyIUo97FAkZK06FQtGz+pFjymM2kgqsjUWRmYiHH/VgNSUQymWw==",
+            "content_md5": "23c49acc9f1ea6af57b969fd17d608c5",
+            "content_sha1": "8195de28b20efa81ad9bb9039151b8a89a9bb384",
+            "content_sha256": "f4c9cef6f0d6d7cba16f10fc556279378cfe19cd0a9eab7c2eb4ce6c1ee55249",
+            "content_sha512": "97aff72260c840bffb673d1c70a3d81b3902e9319385a1c8939aedc88528f7b1409192b4e8542d1b3fa9163ca6336920aac8d45919988871ff560352510ca65b",
+            "directory_permission": "0777",
+            "file_permission": "0777",
+            "filename": "./state-demo.txt",
+            "id": "8195de28b20efa81ad9bb9039151b8a89a9bb384",
+            "sensitive_content": null,
+            "source": null
+          },
+          "sensitive_attributes": [
+            [
+              {
+                "type": "get_attr",
+                "value": "sensitive_content"
+              }
+            ]
+          ],
+          "identity_schema_version": 0
+        }
+      ]
+    }
+  ],
+  "check_results": null
+}
