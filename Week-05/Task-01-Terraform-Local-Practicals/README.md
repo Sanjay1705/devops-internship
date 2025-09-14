@@ -1,70 +1,130 @@
-# Terraform Local Practicals – 10 Hands-On Tasks with Explanations
+# Terraform Local Practicals 
 
 
 This lab deepens your Terraform fundamentals using the local provider. Each practical introduces a new concept—functions, conditionals, loops, and dynamic content generation—without requiring cloud access. Ideal for interns building confidence before moving to AWS or other providers.
 
 
-Practical Summaries:
---------------------
 
-Practical 1 – Functions Basics
+### Practical 1 – Functions Basics
 - Goal: Use built-in functions like upper, lower, format, join
-- Outcome: Learn how Terraform transforms strings and lists dynamically
 
-Practical 2 – Conditionals (Environment Switch)
-- Goal: Use ternary operator to switch content based on variable
-- Outcome: Understand how to deploy different environments using one config
+**Steps:**
+1. Create main.tf write this code :
+```hcl
+terraform {
+  required_providers { local = { source = "hashicorp/local", version = "~> 2.0" } }
+}
+provider "local" {}
 
-Practical 3 – For Expression (List Transformation)
+resource "local_file" "f" {
+  filename = "${path.module}/func.txt"
+  content  = join("\n", [
+    upper("terraform"),
+    lower("INTERN"),
+    format("Hi %s","Team"),
+    join(", ", ["aws","linux","terraform"])
+  ])
+}
+```
+
+2. Initialize Terraform :
+   ```bash
+   terraform init
+   ```
+
+3. See what Terraform will do:
+   ```bash
+   terraform plan
+   ```
+
+4. Apply the configuration :
+   ```bash
+   terraform apply -auto-approve
+   ```
+
+5. Inspect the generated file:
+   ```bash
+   cat func.txt
+   ```
+
+
+### Practical 2 – Conditionals (Environment Switch)
+- Goal: Switch content using ` ? : ` (ternary conditional expression).
+
+**Steps:**
+
+1. Add this code in main.tf:
+```hcl
+resource "local_file" "env" {
+  filename = "${path.module}/env.txt"
+  content  = var.environment == "dev" ? "Using t2.micro" : "Using t3.medium"
+}
+```
+2. Add this code in variable.tf:
+```hcl
+variable "environment" { type = string, default = "dev" }
+```
+
+3. Initialize:
+   ```bash
+   terraform init
+   ```
+
+4. Plan & apply :
+   ```bash
+   terraform plan
+   terraform apply -auto-approve
+   cat env.txt 
+   ```
+
+5. Clean up:
+   ```bash
+   terraform destroy -auto-approve
+   rm -f .terraform.lock.hcl .terraform/* env.txt
+   ```
+
+### Practical 3 – For Expression (List Transformation)
 - Goal: Loop through a list of names and generate greetings
-- Outcome: Learn how to reshape data and automate repetitive tasks
 
-Practical 4 – Dynamic Blocks (Not included in preview)
-- Goal: Use dynamic blocks to conditionally generate nested configs
-- Outcome: Understand advanced HCL constructs for modularity
+1. Add this code into main.tf:
+    ```hcl
+    locals {
+      hello_list = [for n in var.names : format("Hello %s", upper(n))]
+    }
+    
+    resource "local_file" "greetings" {
+      filename = "${path.module}/greetings.txt"
+      content  = join("\n", local.hello_list)
+    }
+    ```
+2. Add this code in variable.tf:
+```hcl
+variable "names" {
+  type    = list(string)
+  default = ["sanjay","harjeet","dhaval"]
+}
+```
 
-Practical 5 – Locals
-- Goal: Define reusable expressions using `locals`
-- Outcome: Improve readability and reduce duplication in configs
+3. Initialize & apply:
+   ```bash
+   terraform init
+   terraform apply -auto-approve   # (After this command greetings.txt file is generated as an output)
+   ```
 
-Practical 6 – File Interpolation
-- Goal: Use variables and functions to generate file content
-- Outcome: Learn how to build dynamic file outputs for CI/CD or documentation
+3. Clean up:
+   ```bash
+   terraform destroy -auto-approve
+   rm -f .terraform.lock.hcl .terraform/* greetings.txt
+   ```
 
-Practical 7 – Multiple Resources
-- Goal: Create multiple files using count or for_each
-- Outcome: Understand resource scaling and iteration
+### Learning Outcomes:
 
-Practical 8 – Nested Loops
-- Goal: Generate matrix-style outputs using nested for expressions
-- Outcome: Learn how to model complex data structures
+By completing the practicals included in the uploaded PDF, you will be able to:
+- Use different Terraform functions (like changing words to uppercase/lowercase, joining text, or formatting strings) to prepare values before using them.
+- Use ternary conditionals (`cond ? true_val : false_val`) to switch configuration behavior based on variables. 
+- Create and use for-loops in Terraform to repeat tasks or make new lists from existing ones.
+- Work with the local provider to create files on your own computer and test Terraform without needing cloud access.
+- Run the basic Terraform workflow: `init` → `plan` → `apply` → `destroy` and understand what each step does.
+- Solve small issues like plugin errors, file permission problems, or state cleanup when running Terraform.
 
-Practical 9 – Conditional Resource Creation
-- Goal: Use `count` with conditionals to toggle resource creation
-- Outcome: Build flexible infrastructure that adapts to input
 
-Practical 10 – Output Formatting
-- Goal: Format outputs for readability and downstream use
-- Outcome: Learn how to expose useful values to other modules or teams
-
-Learning Outcomes:
-------------------
-
-- Master Terraform syntax: HCL, variables, outputs, locals, loops
-- Build reusable, modular configurations
-- Understand how Terraform transforms data before provisioning
-- Prepare for cloud-based Terraform workflows (AWS, Azure, GCP)
-- Gain confidence in debugging and interpreting Terraform plans
-
-Usage Notes:
-------------
-- Each practical is self-contained and can be run independently
-- Use `terraform init`, `plan`, `apply`, and `destroy` in each folder
-- Modify variables to test different scenarios
-- Check generated files for expected content and structure
-
-Cleanup:
---------
-- Delete generated `.txt` files after each run
-- Remove `.terraform` folders to reset state
-- Use `terraform destroy` to clean up resources
